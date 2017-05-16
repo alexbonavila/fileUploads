@@ -24845,12 +24845,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         submit: function submit() {
-            axios.post('api/v1/users', {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-                file: this.file
-            }).then(data);
+
+            var form_prof = document.getElementById("form-profile");
+
+            var data = new FormData(form_prof);
+
+            axios.post('api/v1/user', data).then(function (res) {
+                console.log(res);
+            }).catch(function (err) {
+                console.log(err1);
+            });
         }
     }
 });
@@ -44632,6 +44636,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "create-user-form"
     }
   }, [_c('form', {
+    attrs: {
+      "id": "form-profile",
+      "name": "form-profile",
+      "accept-charset": "UTF-8",
+      "enctype": "multipart/form-data"
+    },
     on: {
       "submit": function($event) {
         $event.preventDefault();
@@ -44640,7 +44650,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_c('lavel', {
+  }, [_c('label', {
     attrs: {
       "for": "name"
     }
@@ -44667,9 +44677,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.name = $event.target.value
       }
     }
-  })], 1), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
-  }, [_c('lavel', {
+  }, [_c('label', {
     attrs: {
       "for": "email"
     }
@@ -44696,9 +44706,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.email = $event.target.value
       }
     }
-  })], 1), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
-  }, [_c('lavel', {
+  }, [_c('label', {
     attrs: {
       "for": "password"
     }
@@ -44725,9 +44735,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.password = $event.target.value
       }
     }
-  })], 1), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('button', {
+    attrs: {
+      "type": "submit",
+      "name": "create-user-button",
+      "id": "create-user-button"
+    }
+  }, [_vm._v("Create")])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-group"
-  }, [_c('lavel', {
+  }, [_c('label', {
     attrs: {
       "for": "file"
     }
@@ -44738,14 +44756,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "file",
       "value": ""
     }
-  })], 1), _vm._v(" "), _c('button', {
-    attrs: {
-      "type": "submit",
-      "name": "create-user-button",
-      "id": "create-user-button"
-    }
-  }, [_vm._v("Create")])])])
-},staticRenderFns: []}
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
