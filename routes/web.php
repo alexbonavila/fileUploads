@@ -24,6 +24,4 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
     Route::get('profile', 'ProfileController@index')->name('profile');
 
-    Route::get('users', 'UsersController@index')->name('users');
-
 });
