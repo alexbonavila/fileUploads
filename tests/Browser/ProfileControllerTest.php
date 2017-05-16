@@ -20,6 +20,7 @@ class ProfileControllerTest extends DuskTestCase
      */
     public function test_user_are_created_ok()
     {
+        //PREPARE
         $faker=Factory::create();
 
         $user = [
@@ -31,6 +32,7 @@ class ProfileControllerTest extends DuskTestCase
         $admin = factory(User::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $admin){
+            //EXECUTE
             $browser->loginAs($admin)
                 ->pause(10000)
                 ->visit('/profile')

@@ -24833,6 +24833,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
+    },
+    data: function data() {
+        return {
+            name: '',
+            email: '',
+            password: '',
+            file: ''
+        };
+    },
+
+    methods: {
+        submit: function submit() {
+            axios.post('api/v1/users', {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                file: this.file
+            }).then(data);
+        }
     }
 });
 
@@ -44613,8 +44632,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "create-user-form"
     }
   }, [_c('form', {
-    attrs: {
-      "action": ""
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.submit($event)
+      }
     }
   }, [_c('div', {
     staticClass: "form-group"
@@ -44623,12 +44645,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "name"
     }
   }, [_vm._v("Name:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.name),
+      expression: "name"
+    }],
     attrs: {
       "type": "text",
       "name": "name",
       "id": "name",
       "placeholder": "Name",
       "value": ""
+    },
+    domProps: {
+      "value": (_vm.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.name = $event.target.value
+      }
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -44637,12 +44674,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "email"
     }
   }, [_vm._v("Email:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.email),
+      expression: "email"
+    }],
     attrs: {
       "type": "email",
       "name": "email",
       "id": "email",
       "placeholder": "Email",
       "value": ""
+    },
+    domProps: {
+      "value": (_vm.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.email = $event.target.value
+      }
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -44651,12 +44703,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "password"
     }
   }, [_vm._v("Password:")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
     attrs: {
       "type": "password",
       "name": "password",
       "id": "password",
       "placeholder": "Password",
       "value": ""
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group"
