@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use Faker\Factory;
 use Illuminate\Http\UploadedFile;
 use Tests\DuskTestCase;
@@ -25,11 +26,15 @@ class ProfileControllerTest extends DuskTestCase
             'name' => $name=$faker->name,
             'email' => $email=$faker->unique()->safeEmail,
             'password' => $password=$faker->password,
-            'file' => UploadedFile::fake()->image('guapo.png')
         ];
 
-        $this->browse(function (Browser $browser) use ($user){
-            $browser->visit('/profile')
+        $admin = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($user, $admin){
+            $browser->loginAs($admin)
+                ->pause(10000)
+                ->visit('/profile')
+                ->pause(5000)
                 ->type('name', $user["name"])
                 ->type('email', $user["email"])
                 ->type('password', $user["password"])

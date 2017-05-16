@@ -21,7 +21,9 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        Put your content here
+
+                        <create-user-form></create-user-form>
+
                     </div>
                     <!-- /.box-body -->
                 </div>
