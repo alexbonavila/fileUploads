@@ -26,13 +26,14 @@ class UserControllerTest extends TestCase
         $user = [
             'name' => $name=$faker->name,
             'email' => $email=$faker->unique()->safeEmail,
-            'password' => $password=bcrypt('secret')
+            'password' => $password=bcrypt('secret'),
+            'file' => 'lameva/foto.png'
         ];
 
         $auth_user=Factory(User::class)->create();
 
         //execute
-        $response = $this->actingAs($auth_user, 'api')->json('post','api/v1/user',['name' => 'Sally']);
+        $response = $this->actingAs($auth_user, 'api')->json('post','api/v1/user', $user);
 
         //assert
         $response->assertStatus(200)
@@ -41,7 +42,8 @@ class UserControllerTest extends TestCase
         $this->assertDatabaseHas('users',[
             'name' => $name,
             'email' => $email,
-            'password' => $password
+            'password' => $password,
+            'file' => 'lameva/foto.png'
         ]);
     }
 }

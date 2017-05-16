@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->only(['email','name','password']));
+        User::create($request->only(['email','name','password','file']));
         return ['created'=> true];
     }
 
