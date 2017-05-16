@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+
 use App\User;
 use Faker\Factory;
 use Illuminate\Http\UploadedFile;
@@ -23,33 +24,31 @@ class UserControllerTest extends TestCase
      */
     public function testUsersCreatedOk()
     {
-        //prepare
+        // Prepare
         Storage::fake('local');
-
         $faker = Factory::create();
         $user = [
-            'name' => $name=$faker->name,
-            'email' => $email=$faker->unique()->safeEmail,
-            'password' => $password=bcrypt('secret'),
+            'name' => $name = $faker->name,
+            'email' => $email = $faker->unique()->safeEmail ,
+            'password' => $password = bcrypt('secret'),
             'file' => UploadedFile::fake()->image('guapo.png')
         ];
-
-        $auth_user=Factory(User::class)->create();
-
-        //execute
-        $response = $this->actingAs($auth_user, 'api')->json('post','api/v1/user', $user);
-
-        //assert
-        $response->assertStatus(200)
-        ->assertJson(['created'=> true]);
-
-        $this->assertDatabaseHas('users',[
+        //Login as authorized user and Execute
+        $authorizedUser = factory(User::class)->create();
+        $response = $this->actingAs($authorizedUser,'api')->json('POST', 'api/v1/user', $user);
+//        ->dump();
+        // Assert
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'created' => true,
+            ]);
+        $this->assertDatabaseHas('users', [
             'name' => $name,
-            'email' => $email,
+            'email' => $email ,
             'password' => $password,
-            'file' => 'lameva/foto.png'
+            'file' => 'guapo.png',
         ]);
-
         Storage::disk('local')->assertExists('guapo.png');
     }
 }
