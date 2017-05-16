@@ -17,6 +17,7 @@
                 <lavel for="file">File:</lavel>
                 <input type="file" name="file" id="file" value="">
             </div>
+            <button type="submit" name="create-user-button" id="create-user-button">Create</button>
         </form>
     </div>
 </template>

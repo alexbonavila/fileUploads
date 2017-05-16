@@ -24828,6 +24828,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -44670,7 +44671,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "file",
       "value": ""
     }
-  })], 1)])])
+  })], 1), _vm._v(" "), _c('button', {
+    attrs: {
+      "type": "submit",
+      "name": "create-user-button",
+      "id": "create-user-button"
+    }
+  }, [_vm._v("Create")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
