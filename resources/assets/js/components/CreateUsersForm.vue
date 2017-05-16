@@ -45,7 +45,7 @@
                 axios.post('api/v1/user', data).then(function (res) {
                     console.log(res)
                 }).catch(function (err) {
-                    console.log(err1)
+                    console.log(err)
                 })
             }
         }
