@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Faker\Factory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -10,6 +11,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserControllerTest extends TestCase
 {
+
+    use DatabaseMigrations;
+
     /**
      * Test users are created ok
      *
@@ -24,12 +28,13 @@ class UserControllerTest extends TestCase
             'email' => $email=$faker->unique()->safeEmail,
             'password' => $password=bcrypt('secret')
         ];
+
+        $auth_user=Factory(User::class)->create();
+
         //execute
+        $response = $this->actingAs($auth_user, 'api')->json('post','api/v1/user',['name' => 'Sally']);
 
         //assert
-
-        $response = $this->json('post','api/v1/user',['name' => 'Sally']);
-
         $response->assertStatus(200)
         ->assertJson(['created'=> true]);
 
